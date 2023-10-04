@@ -1,0 +1,71 @@
+openapi: 3.0.3
+info:
+  title: Exchange application
+  version: 1.0.0
+  description: |-
+    This is a demo application which can calculate currency exchange for certain values.
+  contact:
+    email: michalsu96@gmail.com
+  #servers:
+  #- url: TODO
+tags:
+  - name: currency
+    description: All the endpoints related to currency exchange
+paths:
+  /calculate-currency/{desiredCurrency}:
+    get:
+      tags:
+        - currency
+      summary: Calculates currency provided in request
+      description: Calculates currency according to given criteria
+      operationId: calculateCurrency
+      parameters:
+        - name: desiredCurrency
+          in: path
+          description: Desired currency code value in ISO 4217 standard.
+          required: true
+          schema:
+            type: string
+            maxLength: 3
+            minLength: 3
+            example: "CHF"
+        - name: value
+          in: query
+          description: Currency value to exchange.
+          required: true
+          schema:
+            type: number
+            example: 100.31
+        - name: actualCurrency
+          in: query
+          description: Actual currency of a value in ISO 4217 standard.
+          required: true
+          schema:
+            type: string
+            maxLength: 3
+            minLength: 3
+            example: "EUR"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeResult'
+        '404':
+          description: Bad request
+components:
+  schemas:
+    ExchangeResult:
+      type: object
+      properties:
+        currency:
+          type: string
+          maxLength: 3
+          minLength: 3
+          description: Currency of a value in ISO 4217 standard.
+          example: "EUR"
+        value:
+          type: number
+          description: Currency value.
+          example: 104.13

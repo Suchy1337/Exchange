@@ -15,6 +15,7 @@
 	<description>Demo project for retrieving currency exchange data</description>
 	<properties>
 		<java.version>21</java.version>
+		<start-class>${project.groupId}.${project.artifactId}.ExchangeApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,10 +28,31 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- OpenAPI Generator dependencies -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>8.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.7.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.0</version>
 		</dependency>
 	</dependencies>
 
@@ -47,6 +69,26 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<!-- RELEASE_VERSION -->
+				<version>6.3.0</version>
+				<!-- /RELEASE_VERSION -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/api/api.yml</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>com.msuchan.exchange.api</apiPackage>
+							<modelPackage>com.msuchan.exchange.model</modelPackage>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

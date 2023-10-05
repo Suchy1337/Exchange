@@ -13,6 +13,7 @@ public class CurrencyApiRestController implements CalculateCurrencyApi {
 
     @Override
     public ResponseEntity<ExchangeResult> calculateCurrency(String desiredCurrency, BigDecimal value, String actualCurrency){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        //Mocked for now
+        return ResponseEntity.ok(new ExchangeResult().currency(actualCurrency).value(value));
     }
 }

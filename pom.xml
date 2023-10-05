@@ -86,6 +86,9 @@
 							<generatorName>spring</generatorName>
 							<apiPackage>com.msuchan.exchange.api</apiPackage>
 							<modelPackage>com.msuchan.exchange.model</modelPackage>
+							<configOptions>
+								<interfaceOnly>true</interfaceOnly>
+							</configOptions>
 						</configuration>
 					</execution>
 				</executions>

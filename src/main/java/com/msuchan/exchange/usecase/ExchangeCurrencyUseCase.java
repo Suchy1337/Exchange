@@ -8,9 +8,9 @@ public interface ExchangeCurrencyUseCase {
     /**
      * Exchanges the value in Polish Zloty's to desired currency.
      *
-     * @param  desiredCurrency  currency in ISO 4217 standard to which the value should be exchanged
+     * @param  currency  currency in ISO 4217 standard to which the value should be exchanged
      * @param  value value in Polish Zloty's to exchange
      * @return      the exchange result
      */
-    ExchangeResult exchangeCurrency(String desiredCurrency, BigDecimal value);
+    ExchangeResult exchangeCurrency(String currency, BigDecimal value);
 }

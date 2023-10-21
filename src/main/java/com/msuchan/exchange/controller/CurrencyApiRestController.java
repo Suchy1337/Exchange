@@ -18,7 +18,7 @@ public class CurrencyApiRestController implements CurrencyApi {
     @Override
     public ResponseEntity<ExchangeResultDTO> calculateCurrency(String desiredCurrency, BigDecimal value){
         final var result = exchangeCurrencyUseCase.exchangeCurrency(desiredCurrency, value);
-        
+
         //TODO - Implement the functionality
         return ResponseEntity.ok(new ExchangeResultDTO().value(value));
     }

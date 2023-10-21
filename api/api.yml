@@ -3,21 +3,21 @@ info:
   title: Exchange application
   version: 1.0.0
   description: |-
-    This is a demo application which can calculate currency exchange for certain values.
+    This is a demo application which can calculate currency exchange for Polish Zloty's.
   contact:
     email: michalsu96@gmail.com
   #servers:
   #- url: TODO
 tags:
   - name: currency
-    description: All the endpoints related to currency exchange
+    description: All the endpoints related to currency exchange.
 paths:
   /calculate-currency/{desiredCurrency}:
     get:
       tags:
         - currency
-      summary: Calculates currency provided in request
-      description: Calculates currency according to given criteria.
+      summary: Calculates Polish Zloty's provided in request.
+      description: Calculates Polish Zloty's according to given criteria.
       operationId: calculateCurrency
       parameters:
         - name: desiredCurrency
@@ -60,3 +60,17 @@ components:
           type: number
           description: Currency value.
           example: 104.13
+        exchangeRate:
+          $ref: '#/components/schemas/ExchangeRateDTO'
+    ExchangeRateDTO:
+      type: object
+      properties:
+        rate:
+          type: number
+          description: Exchange rate based on ask value.
+          example: 4.2521
+        date:
+          type: string
+          format: date
+          description: Exchange rate date from which the calculation is performed.
+          example: "2023-02-08"

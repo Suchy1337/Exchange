@@ -17,12 +17,12 @@ paths:
       tags:
         - currency
       summary: Calculates currency provided in request
-      description: Calculates currency according to given criteria
+      description: Calculates currency according to given criteria.
       operationId: calculateCurrency
       parameters:
         - name: desiredCurrency
           in: path
-          description: Desired currency code value in ISO 4217 standard.
+          description: Desired currency code to which provided value should be exchanged in ISO 4217 standard.
           required: true
           schema:
             type: string
@@ -31,32 +31,23 @@ paths:
             example: "CHF"
         - name: value
           in: query
-          description: Currency value to exchange.
+          description: Value of currency to exchange in Polish Zloty.
           required: true
           schema:
             type: number
             example: 100.31
-        - name: actualCurrency
-          in: query
-          description: Actual currency of a value in ISO 4217 standard.
-          required: true
-          schema:
-            type: string
-            maxLength: 3
-            minLength: 3
-            example: "EUR"
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExchangeResult'
+                $ref: '#/components/schemas/ExchangeResultDTO'
         '404':
           description: Bad request
 components:
   schemas:
-    ExchangeResult:
+    ExchangeResultDTO:
       type: object
       properties:
         currency:

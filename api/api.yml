@@ -43,12 +43,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExchangeResultDTO'
+        '400':
+          $ref: '#/components/responses/BaseError'
         '404':
-          description: Bad request
+          $ref: '#/components/responses/BaseError'
 components:
   schemas:
     ExchangeResultDTO:
       type: object
+      description: Main object which holds the exchange result.
       properties:
         currency:
           type: string
@@ -64,6 +67,7 @@ components:
           $ref: '#/components/schemas/ExchangeRateDTO'
     ExchangeRateDTO:
       type: object
+      description: Details of the exchange rate for the exchange operation.
       properties:
         rate:
           type: number
@@ -74,3 +78,51 @@ components:
           format: date
           description: Exchange rate date from which the calculation is performed.
           example: "2023-02-08"
+    ErrorObject:
+      type: object
+      description: Main object which holds the data about the error.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: At which time the error occurs.
+          example: "2017-07-21T17:32:28Z"
+        status:
+          type: integer
+          description: Status of an error.
+          example: 400
+        type:
+          type: string
+          description: A type of an error.
+          example: "incorrect_query_param"
+        message:
+          type: string
+          description: Detailed message about the error.
+          example: "Provided query parameter is invalid."
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      description: Object which holds the data about the error details.
+      properties:
+        type:
+          type: string
+          description: A type of an error.
+          example: "param_criteria_is_not_met"
+        message:
+          type: string
+          description: Detailed message about the error detail.
+          example: "desiredCurrency parameter should be in ISO 4217 standard."
+  responses:
+    BaseError:
+      description: Main object which holds the data about the error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorObject'
+            example:
+              status: 400
+              type: "incorrect_query_param"
+              message: "Provided query parameter is invalid."
